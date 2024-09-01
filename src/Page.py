@@ -1,6 +1,6 @@
 import numpy as np
 import time
-from src import Packet
+from .Packet import Packet
 
 # it considers that the packet added to the page must have SN as the first element
 # the rest is optional

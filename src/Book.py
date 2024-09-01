@@ -1,6 +1,7 @@
 import numpy as np
 import time
-from src import Page, Packet 
+from .Packet import Packet 
+from .Page import Page
 
 
 class SlidingBook:
