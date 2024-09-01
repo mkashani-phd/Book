@@ -101,6 +101,32 @@ class TestPage(unittest.TestCase):
 
         self.assertGreater(page.last_update_time, last_update_time_before_clear)
 
+    def test_fill_missing_packets(self):
+        # Test filling missing packets in the page
+        page = Page(page_size=5)
+        packet1 = Packet(SN=0, message=b'message1', mac=b'mac1')
+        packet2 = Packet(SN=2, message=b'message2', mac=b'mac2')
+
+        page.add_packet(packet1)
+        page.add_packet(packet2)
+        page.fill_missing_packets()
+
+        self.assertEqual(page.occupancy, 5)
+        self.assertEqual(page.packets[0].SN, 0)
+        self.assertEqual(page.packets[1].SN, 1)
+        self.assertEqual(page.packets[2].SN, 2)
+        self.assertEqual(page.packets[3].SN, 3)
+        self.assertEqual(page.packets[4].SN, 4)
+        
+        self.assertEqual(page.packets[0].message, b'message1')
+        self.assertEqual(page.packets[1].message, b'')
+        self.assertEqual(page.packets[2].message, b'message2')
+        self.assertEqual(page.packets[3].message, b'')
+        self.assertEqual(page.packets[4].message, b'')
+
+
+        
+
 if __name__ == '__main__':
     unittest.main()
 

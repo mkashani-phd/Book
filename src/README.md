@@ -72,7 +72,7 @@ Each class has a corresponding unit test file located in the `tests/` directory.
 To run the unit tests, navigate to the `Book/` directory and execute:
 
 ```bash
-python -m unittest discover -s tests
+python3 -m unittest discover -s src/tests
 ```
 
 This command will automatically discover and run all unit tests in the tests/ directory.
