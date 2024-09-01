@@ -6,8 +6,17 @@ The **Book** package is a Python module designed to manage a collection of netwo
 
 ## Project Structure
 
-Book/ │ ├── init.py # Initializes the Book package ├── Book.py # Contains the SlidingBook class ├── Page.py # Contains the Page class ├── Packet.py # Contains the Packet class ├── tests/ │ ├── test_book.py # Unit tests for SlidingBook class │ ├── test_page.py # Unit tests for Page class │ └── test_packet.py # Unit tests for Packet class └── README.md # Documentation for the Book package
+The `Book` package is organized as follows:
 
+- **`__init__.py`**: Initializes the `Book` package, allowing it to be imported as a module.
+- **`Book.py`**: Contains the `SlidingBook` class, which manages multiple pages of packets in a sliding window fashion.
+- **`Page.py`**: Contains the `Page` class, which organizes multiple `Packet` instances into a page.
+- **`Packet.py`**: Contains the `Packet` class, representing an individual network packet.
+- **`tests/`**: A directory containing unit tests for each class in the `Book` package:
+  - **`__init__.py`**: Initializes the `tests` package.
+  - **`test_book.py`**: Unit tests for the `SlidingBook` class.
+  - **`test_page.py`**: Unit tests for the `Page` class.
+  - **`test_packet.py`**: Unit tests for the `Packet` class.
 
 ## Classes
 
@@ -72,7 +81,7 @@ Each class has a corresponding unit test file located in the `tests/` directory.
 To run the unit tests, navigate to the `Book/` directory and execute:
 
 ```bash
-python -m unittest discover -s tests
+python3 -m unittest discover -s src/tests
 ```
 
 This command will automatically discover and run all unit tests in the tests/ directory.
@@ -118,5 +127,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 6. **Contributing**: Invites contributions from the community.
 7. **License**: Mentions the license under which the package is distributed.
 
-This `README.md` should give users a clear understanding of how to use and contribute to the `Book` package.
+
 

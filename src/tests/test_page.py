@@ -1,6 +1,6 @@
 import unittest
 import time
-from ..Book import Page, Packet
+from src import Page, Packet
 
 class TestPage(unittest.TestCase):
 
