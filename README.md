@@ -91,7 +91,7 @@ This command will automatically discover and run all unit tests in the tests/ di
 Here is a basic example of how to use the Book package:
 
 ```python
-from Book import SlidingBook, Packet
+from src import SlidingBook, Packet
 
 # Create a SlidingBook instance
 book = SlidingBook(num_pages=10, page_size=5)
@@ -108,6 +108,8 @@ print(book.get_page_index())
 # Clear all pages
 book.clear_all()
 ```
+
+See the `Example.ipynb` for more detail.
 
 # Contributing
 Contributions are welcome! Please feel free to submit a Pull Request or open an Issue on GitHub.
