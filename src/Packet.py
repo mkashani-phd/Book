@@ -10,7 +10,7 @@ class Packet:
         self.message = message
         self.mac = mac
         self.payload_size = self._determine_payload_size(len(message))  # Determine the payload size based on the message length
-
+        self.verified_bytes = 0  # the number of bytes verifying the packet
     def _determine_payload_size(self, message_length: int) -> int:
         """Determine the payload size based on the message length."""
         for size in self.ALLOWED_PAYLOAD_SIZES:
@@ -49,6 +49,6 @@ class Packet:
         return cls(SN=SN, message=message, mac=mac, timestamp=timestamp)
 
     def __repr__(self):
-        return f"Packet(SN={self.SN}, message={self.message}, mac={self.mac}, timestamp={self.timestamp}, payload_size={self.payload_size})"
+        return f"Packet(SN={self.SN}, message={self.message}, mac={self.mac}, timestamp={self.timestamp}, payload_size={self.payload_size}, verified_bytes={self.verified_bytes})"
 
 
