@@ -1,5 +1,2 @@
-from .src.Page import Page
-from .src.Packet import Packet
-from .src.Book import SlidingBook
+from .src import Packet, Page, SlidingBook
 
-__all__ = ['Page', 'Packet', 'SlidingBook']
