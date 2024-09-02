@@ -1,5 +1,6 @@
 import struct
 import time
+import hmac
 
 class Packet:
     ALLOWED_PAYLOAD_SIZES = [0, 128, 256, 512, 1024]
@@ -11,6 +12,7 @@ class Packet:
         self.mac = mac
         self.payload_size = self._determine_payload_size(len(message))  # Determine the payload size based on the message length
         self.verifing_bytes = 0  #number of tag bytes verifying the packet
+        # self.MAC_Size = hmac.new(b'',b'key', digestmod=digestmod).digest_size
 
     def _determine_payload_size(self, message_length: int) -> int:
         """Determine the payload size based on the message length."""
@@ -57,22 +59,22 @@ class Packet:
 
     #     return cls(SN=SN, message=message, mac=mac, timestamp=timestamp)
     @classmethod
-    def from_bytes(cls, data: bytes):
+    def from_bytes(cls, data: bytes, digestmod: str= 'sha384'):
         """Create a Packet instance from a bytes object."""
         # Unpack the combined SN and payload size (first 8 bytes)
         SN_and_size = struct.unpack('!Q', data[:8])[0]
         SN = SN_and_size >> 32  # Extract SN (upper 4 bytes)
         payload_size = SN_and_size & 0xFFFFFFFF  # Extract payload size (lower 4 bytes)
         
-        # Validate payload size
-        if payload_size not in cls.ALLOWED_PAYLOAD_SIZES:
-            raise ValueError(f"Invalid payload size {payload_size}.")
+        # # Validate payload size
+        # if payload_size not in cls.ALLOWED_PAYLOAD_SIZES:
+        #     raise ValueError(f"Invalid payload size {payload_size}.")
 
         # Extract the timestamp (next 8 bytes)
         timestamp = struct.unpack('!d', data[8:16])[0]
         
         # Extract message and MAC
-        message = data[16:16 + payload_size]  # Extract message without needing to strip padding
+        message = data[16:16+payload_size]  # Extract message without needing to strip padding
         mac_start = 16 + payload_size
         mac = data[mac_start:] if mac_start < len(data) else b''
 
