@@ -17,7 +17,7 @@ class SlidingBook:
     def get_min_page_index(self) -> int:
         return self.global_min_SN // self.page_size
     
-    def remove_page(self, page_index:int) -> Page | None:
+    def remove_page(self, page_index:int) -> Page:
         if page_index in self.pages:
             page = self.pages.pop(page_index)
             
@@ -29,7 +29,7 @@ class SlidingBook:
             return page  # Return the detached packets
         return None
 
-    def add_packet(self, packet:Packet) -> Page | None:
+    def add_packet(self, packet:Packet) -> Page:
         SN = packet.SN
         page_index = SN // self.page_size
 
