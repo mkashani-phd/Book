@@ -5,9 +5,9 @@ import hmac
 class Packet:
     ALLOWED_PAYLOAD_SIZES = [0, 128, 256, 512, 1024]
 
-    def __init__(self, SN: int, message: bytes, mac: bytes = b'', timestamp: float = None):
+    def __init__(self, SN: int, message: bytes, mac: bytes = b'', timestamp: float = 0):
         self.SN = SN
-        self.timestamp = timestamp if timestamp is not None else time.time()
+        self.timestamp = timestamp 
         self.message = message
         self.mac = mac
         self.payload_size = self._determine_payload_size(len(message))  # Determine the payload size based on the message length
@@ -35,7 +35,7 @@ class Packet:
         SN_and_size = (self.SN << 32) | len(self.message)
         # Using struct.pack to efficiently serialize the packet
         return struct.pack(f'!Qd{len(self.message)}s{len(self.mac)}s', 
-                        SN_and_size, self.timestamp, self.message, self.mac)
+                        SN_and_size, time.time(), self.message, self.mac)
 
     # @classmethod
     # def from_bytes(cls, data: bytes):
